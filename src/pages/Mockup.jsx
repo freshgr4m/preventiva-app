@@ -85,31 +85,6 @@ export default function Mockup() {
             ? problemLine
             : "Tutti gli schermi, più una spiegazione di come funziona il calcolatore e perché cambia il modo in cui arrivano le richieste."}
         </p>
-
-        <div
-          style={{
-            marginTop: "32px",
-            background: "#fdf3cf",
-            border: "1px solid #ecd97a",
-            borderRadius: "16px",
-            padding: "20px 22px",
-            display: "flex",
-            gap: "14px",
-            alignItems: "flex-start",
-            maxWidth: "72ch",
-          }}
-        >
-          <span style={{ fontSize: "18px", lineHeight: 1.4 }} aria-hidden="true">
-            💡
-          </span>
-          <div style={{ fontSize: "14px", lineHeight: 1.65, color: "#5c4b12" }}>
-            <strong>Una nota, così sei tranquillo.</strong> I testi e le foto che vedi qui sono
-            provvisori: alcuni sono immagini e frasi generiche (di repertorio), altri li ho presi
-            dal tuo sito attuale o da tue foto reali dove mi sembravano adatti. Serve solo a farti
-            vedere l'idea — <strong>ogni testo, foto e colore si può cambiare</strong> e lo
-            sistemiamo insieme prima di pubblicare.
-          </div>
-        </div>
       </div>
 
       {gallery.length > 0 && (
@@ -144,6 +119,28 @@ export default function Mockup() {
           </div>
         </div>
       )}
+
+      <div style={{ maxWidth: "1080px", margin: "0 auto", padding: "40px 28px 0" }}>
+        <div
+          style={{
+            background: "#fbf6e6",
+            border: "1px solid #ebe0c0",
+            borderRadius: "18px",
+            padding: "28px",
+            maxWidth: "72ch",
+          }}
+        >
+          <div style={{ fontFamily: MONO, fontSize: "12px", letterSpacing: "0.12em", color: "#9a8b52", marginBottom: "12px" }}>
+            NOTA
+          </div>
+          <p style={{ margin: 0, fontSize: "15px", lineHeight: 1.65, color: "#5f5a48" }}>
+            I testi e le foto che vedi qui sono provvisori: alcuni sono immagini e frasi
+            generiche di repertorio, altri li ho ripresi dal tuo sito attuale o da tue foto
+            reali dove mi sembravano adatti. Serve solo a farti vedere l'idea: ogni testo,
+            foto e colore si può cambiare, e lo sistemiamo insieme prima di pubblicare.
+          </p>
+        </div>
+      </div>
 
       <div style={{ maxWidth: "1080px", margin: "0 auto", padding: "88px 28px 0" }}>
         <div style={{ fontFamily: MONO, fontSize: "12px", letterSpacing: "0.12em", color: "#8a8f8a", marginBottom: "14px" }}>
