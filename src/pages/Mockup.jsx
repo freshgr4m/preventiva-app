@@ -88,6 +88,31 @@ export default function Mockup() {
             ? problemLine
             : "Tutti gli schermi, più una spiegazione di come funziona il calcolatore e perché cambia il modo in cui arrivano le richieste."}
         </p>
+
+        <div
+          style={{
+            marginTop: "32px",
+            background: "#fdf3cf",
+            border: "1px solid #ecd97a",
+            borderRadius: "16px",
+            padding: "20px 22px",
+            display: "flex",
+            gap: "14px",
+            alignItems: "flex-start",
+            maxWidth: "72ch",
+          }}
+        >
+          <span style={{ fontSize: "18px", lineHeight: 1.4 }} aria-hidden="true">
+            💡
+          </span>
+          <div style={{ fontSize: "14px", lineHeight: 1.65, color: "#5c4b12" }}>
+            <strong>Una nota, così sei tranquillo.</strong> I testi e le foto che vedi qui sono
+            provvisori: alcuni sono immagini e frasi generiche (di repertorio), altri li ho presi
+            dal tuo sito attuale o da tue foto reali dove mi sembravano adatti. Serve solo a farti
+            vedere l'idea — <strong>ogni testo, foto e colore si può cambiare</strong> e lo
+            sistemiamo insieme prima di pubblicare.
+          </div>
+        </div>
       </div>
 
       {gallery.length > 0 && (

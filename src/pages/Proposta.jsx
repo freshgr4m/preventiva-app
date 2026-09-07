@@ -129,7 +129,7 @@ export default function Proposta() {
             textWrap: "pretty",
           }}
         >
-          <span style={{ display: "block" }}>La tua proposta per</span>
+          <span style={{ display: "block" }}>Una proposta su misura per</span>
           <span style={{ display: "block", color: accent }}>{companyName}</span>
         </h1>
         <p style={{ margin: 0, fontSize: "17px", lineHeight: 1.55, color: "#6b6f6b", maxWidth: "60ch" }}>
