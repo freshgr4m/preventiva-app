@@ -41,9 +41,7 @@ export default function Mockup() {
     );
   }
 
-  const companyName = data.company_name || "";
   const problemLine = data.problem_line || "";
-  const accent = data.accent_color || "#1c7a4d";
   const gallery = toGalleryUrls(data.gallery);
   const propostaHref = "/" + slug;
 
@@ -80,8 +78,7 @@ export default function Mockup() {
             textWrap: "pretty",
           }}
         >
-          <span style={{ display: "block" }}>Ecco come cambierebbe il sito di</span>
-          <span style={{ display: "block", color: accent }}>{companyName}</span>
+          Ecco come potrebbe apparire
         </h1>
         <p style={{ margin: 0, fontSize: "17px", lineHeight: 1.6, color: "#6b6f6b", maxWidth: "64ch" }}>
           {problemLine
