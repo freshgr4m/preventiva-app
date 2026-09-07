@@ -43,6 +43,7 @@ export default function Mockup() {
 
   const companyName = data.company_name || "";
   const problemLine = data.problem_line || "";
+  const accent = data.accent_color || "#1c7a4d";
   const gallery = toGalleryUrls(data.gallery);
   const propostaHref = "/" + slug;
 
@@ -75,10 +76,12 @@ export default function Mockup() {
             fontWeight: 800,
             letterSpacing: "-0.035em",
             margin: "0 0 18px",
-            maxWidth: "20ch",
+            maxWidth: "24ch",
+            textWrap: "pretty",
           }}
         >
-          Ecco come cambierebbe il sito di {companyName}
+          <span style={{ display: "block" }}>Ecco come cambierebbe il sito di</span>
+          <span style={{ display: "block", color: accent }}>{companyName}</span>
         </h1>
         <p style={{ margin: 0, fontSize: "17px", lineHeight: 1.6, color: "#6b6f6b", maxWidth: "64ch" }}>
           {problemLine
@@ -92,7 +95,7 @@ export default function Mockup() {
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fit,minmax(300px,1fr))",
+              gridTemplateColumns: "repeat(2,1fr)",
               gap: "18px",
             }}
           >

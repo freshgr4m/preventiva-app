@@ -82,10 +82,12 @@ export default function Proposta() {
   const s = services[service] || services[0] || { label: "", base: 0 };
   const f = freqs[freq] || freqs[0] || { label: "", mult: 1, unit: "" };
 
-  // Formula invariata: 45 + m² * base_servizio * moltiplicatore_frequenza, arrotondata ai 5€
+  // Formula invariata: 45 + m² * base_servizio * moltiplicatore_frequenza.
+  // Mostrata come forbice min–max (±15%), arrotondata ai 5€.
   const raw = 45 + sqm * s.base * f.mult;
-  const price = Math.round(raw / 5) * 5;
-  const priceStr = price + "€";
+  const priceMin = Math.max(5, Math.round((raw * 0.85) / 5) * 5);
+  const priceMax = Math.max(priceMin + 5, Math.round((raw * 1.15) / 5) * 5);
+  const priceStr = "€ " + priceMin + " – " + priceMax;
   const priceUnit = f.unit;
   const priceNote =
     s.label +
@@ -356,7 +358,7 @@ export default function Proposta() {
               <div style={{ fontSize: "22px", fontWeight: 700, letterSpacing: "-0.02em" }}>Calcolatore preventivi</div>
             </div>
             <div style={{ fontSize: "14px", color: "#6b6f6b", maxWidth: "34ch" }}>
-              Come lo vedrebbe un tuo cliente dal telefono.
+              Un esempio di come potrebbe apparire sul tuo sito.
             </div>
           </div>
 
@@ -418,8 +420,8 @@ export default function Proposta() {
               <div style={{ fontFamily: MONO, fontSize: "11px", letterSpacing: "0.1em", color: "#4b7d61", marginBottom: "10px" }}>
                 PREVENTIVO INDICATIVO
               </div>
-              <div style={{ display: "flex", alignItems: "baseline", gap: "8px", marginBottom: "6px" }}>
-                <div style={{ fontSize: "44px", fontWeight: 800, letterSpacing: "-0.03em", color: "#14603c" }}>
+              <div style={{ display: "flex", alignItems: "baseline", gap: "8px", marginBottom: "6px", flexWrap: "wrap" }}>
+                <div style={{ fontSize: "clamp(30px,5.5vw,42px)", fontWeight: 800, letterSpacing: "-0.03em", color: "#14603c" }}>
                   {priceStr}
                 </div>
                 <div style={{ fontSize: "15px", color: "#4b7d61" }}>{priceUnit}</div>
@@ -427,7 +429,7 @@ export default function Proposta() {
               <div style={{ fontSize: "13px", lineHeight: 1.55, color: "#4b7d61", marginBottom: "18px" }}>{priceNote}</div>
               <div style={{ height: "1px", background: "#d3e6da", marginBottom: "18px" }} />
               <div style={{ fontSize: "13px", lineHeight: 1.6, color: "#3f6b52" }}>
-                Il cliente vede questo numero in due secondi, poi ti scrive già informato. Meno telefonate a vuoto.
+                Il cliente vede questa cifra in due secondi, poi ti scrive già informato. Meno telefonate a vuoto.
               </div>
             </div>
           </div>
@@ -440,16 +442,19 @@ export default function Proposta() {
             style={{
               display: "inline-flex",
               alignItems: "center",
-              gap: "8px",
-              fontSize: "15px",
-              color: "#6b6f6b",
+              gap: "10px",
+              fontSize: "16px",
+              fontWeight: 700,
+              color: "#fff",
+              background: accent,
               textDecoration: "none",
-              borderBottom: "1px solid #cfcfc9",
-              paddingBottom: "3px",
+              padding: "16px 26px",
+              borderRadius: "999px",
+              border: "2px solid " + accent,
             }}
-            hoverStyle={{ color: accent, borderBottomColor: accent }}
+            hoverStyle={{ background: "#fff", color: accent }}
           >
-            Vedi altri dettagli e screenshot →
+            Guarda i dettagli e gli screenshot →
           </Hover>
         </div>
       </div>
