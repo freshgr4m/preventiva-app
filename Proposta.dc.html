@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  body { margin: 0; background: #f4f4f2; font-family: 'Plus Jakarta Sans', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  a { color: #1c7a4d; }
+  a:hover { color: #145c39; }
+  * { box-sizing: border-box; }
+</style>
+</helmet>
+<div style="background:#f4f4f2;color:#141614;min-height:100%;padding:0 0 0 0">
+  <div style="height:10px;background:#22262a"></div>
+
+  <div style="max-width:1080px;margin:0 auto;padding:56px 28px 0">
+    <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin-bottom:34px">
+      <div style="display:flex;align-items:center;gap:10px">
+        <div style="width:11px;height:11px;background:#1c7a4d;border-radius:2px"></div>
+        <div style="font-size:15px;font-weight:700;letter-spacing:-0.01em">Francesco Mancino</div>
+      </div>
+      <sc-if value="{{ hasLogo }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;align-items:center;gap:20px">
+          <div style="width:1px;height:26px;background:#d5d5d0"></div>
+          <div style="{{ logoStyle }}" role="img" aria-label="Logo cliente"></div>
+        </div>
+      </sc-if>
+    </div>
+
+    <h1 style="font-size:clamp(40px,6.4vw,68px);line-height:1.03;font-weight:800;letter-spacing:-0.035em;margin:0 0 18px;max-width:16ch;text-wrap:pretty">La tua proposta per <span style="color:#1c7a4d">{{ companyName }}</span></h1>
+    <p style="margin:0;font-size:17px;line-height:1.55;color:#6b6f6b;max-width:60ch">{{ problemLine }}</p>
+  </div>
+
+  <div style="max-width:1080px;margin:0 auto;padding:72px 28px 0">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.12em;color:#8a8f8a;margin-bottom:14px">01 — LA PROPOSTA</div>
+    <h2 style="font-size:clamp(28px,3.6vw,40px);line-height:1.1;font-weight:700;letter-spacing:-0.025em;margin:0 0 12px">Ecco cosa ho pensato per te</h2>
+    <p style="margin:0 0 40px;font-size:16px;line-height:1.6;color:#6b6f6b;max-width:62ch">Un sito che si legge bene da telefono e un calcolatore che dà subito un preventivo indicativo, così chi ti scrive sa già di cosa stiamo parlando.</p>
+
+    <div style="border:1px solid #e2e2dd;border-radius:22px;background:#fff;padding:clamp(18px,3vw,40px);margin-bottom:22px">
+      <sc-for list="{{ shotsBig }}" as="shot" hint-placeholder-count="1">
+        <div onClick="{{ shot.open }}" style="width:100%;border:1px solid #ececea;border-radius:14px;overflow:hidden;margin-bottom:18px;cursor:zoom-in">
+          <img src="{{ shot.src }}" alt="{{ shot.alt }}" style="display:block;width:100%;aspect-ratio:4/3;object-fit:cover" />
+        </div>
+      </sc-for>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:18px;width:100%">
+        <sc-for list="{{ shotsRow }}" as="shot" hint-placeholder-count="3">
+          <div onClick="{{ shot.open }}" style="border:1px solid #ececea;border-radius:14px;overflow:hidden;cursor:zoom-in">
+            <img src="{{ shot.src }}" alt="{{ shot.alt }}" style="display:block;width:100%;aspect-ratio:4/3;object-fit:cover" />
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+    <sc-if value="{{ lbOpen }}" hint-placeholder-val="{{ false }}">
+      <div onClick="{{ closeLb }}" style="position:fixed;inset:0;z-index:99999;background:rgba(18,20,18,0.9);display:flex;align-items:center;justify-content:center;padding:clamp(16px,5vw,64px)">
+        <button type="button" onClick="{{ closeLb }}" aria-label="Chiudi" style="position:absolute;top:18px;right:20px;width:44px;height:44px;border-radius:999px;border:1px solid rgba(255,255,255,0.25);background:rgba(255,255,255,0.08);color:#fff;font-size:20px;line-height:1;cursor:pointer">✕</button>
+        <button type="button" onClick="{{ prevLb }}" aria-label="Immagine precedente" style="position:absolute;left:clamp(8px,3vw,32px);top:50%;transform:translateY(-50%);width:48px;height:48px;border-radius:999px;border:1px solid rgba(255,255,255,0.25);background:rgba(255,255,255,0.08);color:#fff;font-size:24px;line-height:1;cursor:pointer">‹</button>
+        <button type="button" onClick="{{ nextLb }}" aria-label="Immagine successiva" style="position:absolute;right:clamp(8px,3vw,32px);top:50%;transform:translateY(-50%);width:48px;height:48px;border-radius:999px;border:1px solid rgba(255,255,255,0.25);background:rgba(255,255,255,0.08);color:#fff;font-size:24px;line-height:1;cursor:pointer">›</button>
+        <div onClick="{{ stopLb }}" style="display:flex;flex-direction:column;align-items:center;gap:14px;max-width:92vw">
+          <img src="{{ lbSrc }}" alt="{{ lbAlt }}" style="display:block;max-width:92vw;max-height:80vh;width:auto;height:auto;border-radius:12px;box-shadow:0 30px 80px rgba(0,0,0,0.5)" />
+          <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.12em;color:#c9cdc9">{{ lbCounter }}</div>
+        </div>
+      </div>
+    </sc-if>
+
+    <div style="border:1px solid #e2e2dd;border-radius:22px;background:#fff;padding:clamp(20px,3vw,34px)">
+      <div style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:22px">
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.12em;color:#8a8f8a;margin-bottom:8px">PROVALO</div>
+          <div style="font-size:22px;font-weight:700;letter-spacing:-0.02em">Calcolatore preventivi</div>
+        </div>
+        <div style="font-size:14px;color:#6b6f6b;max-width:34ch">Come lo vedrebbe un tuo cliente dal telefono.</div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:26px;align-items:start">
+        <div style="display:grid;gap:20px">
+          <div>
+            <div style="font-size:13px;font-weight:600;margin-bottom:9px">Tipo di servizio</div>
+            <div style="display:flex;flex-wrap:wrap;gap:8px">
+              <sc-for list="{{ services }}" as="s" hint-placeholder-count="3">
+                <button type="button" onClick="{{ s.pick }}" style="{{ s.style }}">{{ s.label }}</button>
+              </sc-for>
+            </div>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;font-size:13px;font-weight:600;margin-bottom:9px"><span>Metri quadri</span><span style="font-family:'JetBrains Mono',monospace;color:#1c7a4d">{{ sqmLabel }}</span></div>
+            <input type="range" min="30" max="400" step="10" value="{{ sqm }}" onChange="{{ onSqm }}" style="width:100%;accent-color:#1c7a4d" />
+          </div>
+          <div>
+            <div style="font-size:13px;font-weight:600;margin-bottom:9px">Frequenza</div>
+            <div style="display:flex;flex-wrap:wrap;gap:8px">
+              <sc-for list="{{ freqs }}" as="f" hint-placeholder-count="3">
+                <button type="button" onClick="{{ f.pick }}" style="{{ f.style }}">{{ f.label }}</button>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+
+        <div style="background:#f0f6f2;border:1px solid #d3e6da;border-radius:16px;padding:26px">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.1em;color:#4b7d61;margin-bottom:10px">PREVENTIVO INDICATIVO</div>
+          <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:6px">
+            <div style="font-size:44px;font-weight:800;letter-spacing:-0.03em;color:#14603c">{{ price }}</div>
+            <div style="font-size:15px;color:#4b7d61">{{ priceUnit }}</div>
+          </div>
+          <div style="font-size:13px;line-height:1.55;color:#4b7d61;margin-bottom:18px">{{ priceNote }}</div>
+          <div style="height:1px;background:#d3e6da;margin-bottom:18px"></div>
+          <div style="font-size:13px;line-height:1.6;color:#3f6b52">Il cliente vede questo numero in due secondi, poi ti scrive già informato. Meno telefonate a vuoto.</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:26px">
+      <a href="Mockup.dc.html" style="display:inline-flex;align-items:center;gap:8px;font-size:15px;color:#6b6f6b;text-decoration:none;border-bottom:1px solid #cfcfc9;padding-bottom:3px" style-hover="color:#1c7a4d;border-bottom-color:#1c7a4d">Vedi altri dettagli e screenshot →</a>
+    </div>
+  </div>
+
+  <div style="max-width:1080px;margin:0 auto;padding:96px 28px 0">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.12em;color:#8a8f8a;margin-bottom:14px">02 — PREZZI</div>
+    <h2 style="font-size:clamp(28px,3.6vw,40px);line-height:1.1;font-weight:700;letter-spacing:-0.025em;margin:0 0 12px">Come possiamo lavorare insieme</h2>
+    <p style="margin:0 0 40px;font-size:16px;line-height:1.6;color:#6b6f6b;max-width:76ch">Tre modi di partire. Nessun vincolo di durata: il mensile si può interrompere quando vuoi. Tempi di consegna: solitamente entro 1-2 settimane.</p>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px;align-items:stretch">
+      <div style="background:#fff;border:1px solid #e2e2dd;border-radius:20px;padding:30px 28px;display:flex;flex-direction:column;height:100%">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;color:#8a8f8a;margin-bottom:14px">PIANO 1</div>
+        <div style="font-size:24px;font-weight:700;letter-spacing:-0.02em;line-height:1.2;margin-bottom:12px;min-height:58px">Solo il Calcolatore Preventivi</div>
+        <div style="font-size:15px;line-height:1.5;color:#6b6f6b;margin-bottom:24px;min-height:45px">Hai già un sito? Aggiungo solo il preventivo automatico</div>
+        <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:8px;min-height:40px">
+          <div style="font-size:40px;font-weight:800;letter-spacing:-0.03em">149€</div>
+          <div style="font-size:15px;color:#6b6f6b">una tantum</div>
+        </div>
+        <div style="font-size:15px;color:#141614;margin-bottom:24px">+ <strong>19€/mese</strong></div>
+        <div style="height:1px;background:#e6e6e1;margin-bottom:22px"></div>
+        <div style="display:grid;gap:12px;align-content:start">
+          <div style="display:flex;gap:11px;font-size:15px;line-height:1.5"><span style="color:#1c7a4d">✓</span><span>Calcolatore Preventiva personalizzato</span></div>
+          <div style="display:flex;gap:11px;font-size:15px;line-height:1.5"><span style="color:#1c7a4d">✓</span><span>Installazione sul sito esistente</span></div>
+          <div style="display:flex;gap:11px;font-size:15px;line-height:1.5"><span style="color:#1c7a4d">✓</span><span>Aggiornamenti</span></div>
+        </div>
+      </div>
+
+      <div style="background:#fff;border:1px solid #e2e2dd;border-radius:20px;padding:30px 28px;display:flex;flex-direction:column;height:100%">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;color:#8a8f8a;margin-bottom:14px">PIANO 2</div>
+        <div style="font-size:24px;font-weight:700;letter-spacing:-0.02em;line-height:1.2;margin-bottom:12px;min-height:58px">Sito Web + Calcolatore</div>
+        <div style="font-size:15px;line-height:1.5;color:#6b6f6b;margin-bottom:24px;min-height:45px">Vuoi un sito nuovo, con tutto incluso</div>
+        <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:8px;min-height:40px">
+          <div style="font-size:40px;font-weight:800;letter-spacing:-0.03em">349€</div>
+          <div style="font-size:15px;color:#6b6f6b">una tantum</div>
+        </div>
+        <div style="font-size:15px;color:#141614;margin-bottom:24px">+ <strong>49€/mese</strong></div>
+        <div style="height:1px;background:#e6e6e1;margin-bottom:22px"></div>
+        <div style="display:grid;gap:12px;margin-bottom:24px;align-content:start">
+          <div style="display:flex;gap:11px;font-size:15px;line-height:1.5"><span style="color:#1c7a4d">✓</span><span>Landing page con calcolatore Preventiva integrato</span></div>
+          <div style="display:flex;gap:11px;font-size:15px;line-height:1.5"><span style="color:#1c7a4d">✓</span><span>Il sito resta sempre online, me ne occupo io</span></div>
+          <div style="display:flex;gap:11px;font-size:15px;line-height:1.5"><span style="color:#1c7a4d">✓</span><span>Se c'è un problema o serve una modifica, ci penso io</span></div>
+        </div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#8a8f8a;margin-top:auto">Pagine aggiuntive: 80€ a pagina</div>
+      </div>
+
+      <div style="background:#fff;border:2px solid #1c7a4d;border-radius:20px;padding:30px 28px;position:relative;display:flex;flex-direction:column;height:100%">
+        <div style="position:absolute;top:-15px;left:24px;background:#1c7a4d;color:#fff;font-size:11px;font-weight:700;letter-spacing:0.12em;padding:8px 16px;border-radius:999px">CONSIGLIATO</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;color:#8a8f8a;margin-bottom:14px">PIANO 3</div>
+        <div style="font-size:24px;font-weight:700;letter-spacing:-0.02em;line-height:1.2;margin-bottom:12px;min-height:58px">Sito Web + Farsi trovare su Google <span style="font-size:15px;color:#1c7a4d">(SEO)</span></div>
+        <div style="font-size:15px;line-height:1.5;color:#6b6f6b;margin-bottom:24px;min-height:45px">Come il Piano 2, ma ti troveranno <strong style="color:#141614">facilmente</strong> su Google</div>
+        <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:8px;min-height:40px">
+          <div style="font-size:22px;color:#9a9e9a;text-decoration:line-through">599€</div>
+          <div style="font-size:40px;font-weight:800;letter-spacing:-0.03em">399€</div>
+        </div>
+        <div style="font-size:15px;color:#6b6f6b;margin-bottom:24px">una tantum + <strong style="color:#141614">49€/mese</strong></div>
+        <div style="height:1px;background:#e6e6e1;margin-bottom:22px"></div>
+        <div style="display:grid;gap:12px;margin-bottom:24px;align-content:start">
+          <div style="font-size:15px;font-weight:700">Tutto quello del Piano 2, più:</div>
+          <div style="display:flex;gap:11px;font-size:15px;line-height:1.5"><span style="color:#1c7a4d">✓</span><span><strong>Ottimizzazione SEO</strong>: il tuo sito compare quando qualcuno cerca «pulizie» nella tua zona su Google</span></div>
+        </div>
+        <div style="background:#eaf4ee;border-radius:14px;padding:20px;display:flex;gap:12px;margin-top:auto">
+          <div style="color:#1c7a4d;font-size:16px">⌕</div>
+          <div style="font-size:14px;line-height:1.6;color:#2f5c44">Su Google circa 9 clic su 10 vanno ai risultati normali, non alle pubblicità: se lì non ci sei, quel cliente chiama un altro. Le pubblicità sono come affittare una vetrina, smetti di pagare e spariscono; questo lavoro invece resta tuo nel tempo. Risultato: richieste di preventivo che arrivano da sole, con continuità.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:1080px;margin:0 auto;padding:96px 28px 0">
+    <div style="background:#22262a;color:#f4f4f2;border-radius:26px;padding:clamp(24px,4vw,52px);display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:clamp(24px,4vw,48px);align-items:start">
+      <div>
+        <img src="assets/portait11.png" alt="Francesco Mancino" style="width:100%;max-width:340px;border-radius:18px;display:block;filter:saturate(0.95)" />
+      </div>
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.12em;color:#8d938d;margin-bottom:14px">03 — CHI SONO</div>
+        <h2 style="font-size:clamp(28px,3.4vw,38px);font-weight:700;letter-spacing:-0.03em;line-height:1.1;margin:0 0 18px">Francesco Mancino</h2>
+        <p style="margin:0 0 30px;font-size:16px;line-height:1.65;color:#c9cdc9;max-width:52ch;text-wrap:pretty">Sono Francesco Mancino, sviluppatore web e programmatore. In parole semplici: costruisco siti e piccoli strumenti su misura, curati e facili da usare, pensati per farti arrivare più richieste e meno telefonate a vuoto. Mi piace il lavoro fatto bene e spiegato in modo chiaro, senza tecnicismi. Se ti va, ne parliamo con calma, a presto!</p>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:22px 26px;margin-bottom:32px">
+          <div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.1em;color:#8d938d;margin-bottom:6px">RUOLO</div>
+            <div style="font-size:15px;font-weight:600">Sviluppatore web</div>
+          </div>
+          <div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.1em;color:#8d938d;margin-bottom:6px">SEDE</div>
+            <div style="font-size:15px;font-weight:600">Roma, IT · Remote</div>
+          </div>
+          <div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.1em;color:#8d938d;margin-bottom:6px">FOCUS</div>
+            <div style="font-size:15px;font-weight:600">Siti e strumenti su misura</div>
+          </div>
+          <div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.1em;color:#8d938d;margin-bottom:6px">DISPONIBILITÀ</div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:15px;font-weight:600"><span style="width:8px;height:8px;border-radius:50%;background:#3fbd7c"></span>Disponibile ora</div>
+          </div>
+        </div>
+
+        <div style="display:grid;gap:10px;margin-bottom:34px">
+          <div style="display:flex;gap:14px;font-size:15px;align-items:baseline"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.1em;color:#8d938d;min-width:74px">EMAIL</span><a href="mailto:mancinofrancesco91@gmail.com" style="color:#f4f4f2;text-decoration:none;border-bottom:1px solid #4b5158;padding-bottom:2px">mancinofrancesco91@gmail.com</a></div>
+          <div style="display:flex;gap:14px;font-size:15px;align-items:baseline"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.1em;color:#8d938d;min-width:74px">GITHUB</span><a href="https://github.com/freshgr4m" style="color:#f4f4f2;text-decoration:none;border-bottom:1px solid #4b5158;padding-bottom:2px">@freshgr4m</a></div>
+          <div style="display:flex;gap:14px;font-size:15px;align-items:baseline"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.1em;color:#8d938d;min-width:74px">LINKEDIN</span><a href="https://www.linkedin.com/in/francesco-mancino-dev" style="color:#f4f4f2;text-decoration:none;border-bottom:1px solid #4b5158;padding-bottom:2px">in/francesco-mancino-dev</a></div>
+        </div>
+
+        <a href="https://www.francescomancino.it" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:10px;background:#1c7a4d;color:#fff;font-size:17px;font-weight:700;padding:18px 30px;border-radius:999px;text-decoration:none" style-hover="background:#22935c">Guarda i miei lavori →</a>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:1080px;margin:0 auto;padding:44px 28px 64px">
+    <div style="display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;font-size:14px;color:#8a8f8a">
+      <div>Francesco Mancino · Roma, IT</div>
+      <div style="display:flex;gap:20px;flex-wrap:wrap">
+        <a href="mailto:mancinofrancesco91@gmail.com" style="color:#6b6f6b;text-decoration:none">mancinofrancesco91@gmail.com</a>
+        <a href="https://www.francescomancino.it" target="_blank" rel="noopener" style="color:#6b6f6b;text-decoration:none">francescomancino.it</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;companyName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;[Nome Azienda]&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Cliente&quot;},&quot;problemLine&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;[Problema notato sul sito]&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Cliente&quot;},&quot;companyLogo&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Cliente&quot;}}">
+class Component extends DCLogic {
+  state = { service: 0, sqm: 80, freq: 1, lb: null };
+
+  gallery() {
+    return [
+      { src: "assets/mockup-home-desktop.png", alt: "Home del sito su desktop" },
+      { src: "assets/mockup-mobile-calcolatore.png", alt: "Il calcolatore da telefono" },
+      { src: "assets/mockup-home-calcolatore.png", alt: "Home e calcolatore preventivi" },
+      { src: "assets/mockup-galleria-contatti.png", alt: "Galleria, chi siamo e contatti" }
+    ];
+  }
+
+  componentDidMount() {
+    this._onKey = (e) => {
+      if (this.state.lb == null) return;
+      const n = this.gallery().length;
+      if (e.key === "Escape") this.setState({ lb: null });
+      else if (e.key === "ArrowLeft") this.setState((st) => ({ lb: (st.lb + n - 1) % n }));
+      else if (e.key === "ArrowRight") this.setState((st) => ({ lb: (st.lb + 1) % n }));
+    };
+    window.addEventListener("keydown", this._onKey);
+  }
+
+  componentWillUnmount() {
+    if (this._onKey) window.removeEventListener("keydown", this._onKey);
+  }
+
+  chip(active) {
+    return {
+      font: "inherit", fontSize: "14px", fontWeight: 600, cursor: "pointer",
+      padding: "10px 16px", borderRadius: "999px",
+      border: active ? "1px solid #1c7a4d" : "1px solid #dedeD8",
+      background: active ? "#1c7a4d" : "#fff",
+      color: active ? "#fff" : "#3f423f"
+    };
+  }
+
+  renderVals() {
+    const services = [
+      { label: "Pulizia uffici", base: 0.9 },
+      { label: "Condomini", base: 0.75 },
+      { label: "Fine cantiere", base: 1.6 }
+    ];
+    const freqs = [
+      { label: "Una volta", mult: 1.35, unit: "una tantum" },
+      { label: "Settimanale", mult: 0.85, unit: "a intervento" },
+      { label: "Giornaliera", mult: 0.62, unit: "a intervento" }
+    ];
+    const s = services[this.state.service], f = freqs[this.state.freq];
+    const raw = 45 + this.state.sqm * s.base * f.mult;
+    const price = Math.round(raw / 5) * 5;
+
+    const G = this.gallery();
+    const lb = this.state.lb;
+    const lbOpen = lb != null;
+    const shots = G.map((g, i) => ({
+      src: g.src, alt: g.alt,
+      open: () => this.setState({ lb: i })
+    }));
+    const stop = (e) => { if (e && e.stopPropagation) e.stopPropagation(); };
+
+    return {
+      shotsBig: shots.slice(0, 1),
+      shotsRow: shots.slice(1),
+      lbOpen,
+      lbSrc: lbOpen ? G[lb].src : "",
+      lbAlt: lbOpen ? G[lb].alt : "",
+      lbCounter: lbOpen ? (lb + 1) + " / " + G.length : "",
+      closeLb: () => this.setState({ lb: null }),
+      stopLb: stop,
+      prevLb: (e) => { stop(e); this.setState((st) => ({ lb: (st.lb + G.length - 1) % G.length })); },
+      nextLb: (e) => { stop(e); this.setState((st) => ({ lb: (st.lb + 1) % G.length })); },
+      companyName: this.props.companyName ?? "[Nome Azienda]",
+      problemLine: this.props.problemLine ?? "[Problema notato sul sito]",
+      companyLogo: this.props.companyLogo ?? "",
+      hasLogo: !!(this.props.companyLogo || "").trim(),
+      logoStyle: {
+        height: "34px", width: "160px",
+        backgroundImage: (this.props.companyLogo || "").trim() ? 'url("' + this.props.companyLogo + '")' : "none",
+        backgroundSize: "contain", backgroundRepeat: "no-repeat", backgroundPosition: "left center"
+      },
+      sqm: this.state.sqm,
+      sqmLabel: this.state.sqm + " m²",
+      onSqm: (e) => this.setState({ sqm: Number(e.target.value) }),
+      services: services.map((x, i) => ({
+        label: x.label, style: this.chip(i === this.state.service),
+        pick: () => this.setState({ service: i })
+      })),
+      freqs: freqs.map((x, i) => ({
+        label: x.label, style: this.chip(i === this.state.freq),
+        pick: () => this.setState({ freq: i })
+      })),
+      price: price + "€",
+      priceUnit: f.unit,
+      priceNote: s.label + " · " + this.state.sqm + " m² · " + f.label.toLowerCase() + ". Il preventivo definitivo lo confermi tu."
+    };
+  }
+}
+
+</script>
+</body>
+</html>

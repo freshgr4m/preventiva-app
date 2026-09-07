@@ -1,0 +1,25 @@
+/* Portato 1:1 dal blocco <style> dei file .dc.html originali */
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: #f4f4f2;
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: #1c7a4d;
+}
+
+a:hover {
+  color: #145c39;
+}
+
+* {
+  box-sizing: border-box;
+}

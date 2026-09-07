@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  body { margin: 0; background: #f4f4f2; font-family: 'Plus Jakarta Sans', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  a { color: #1c7a4d; }
+  a:hover { color: #145c39; }
+  * { box-sizing: border-box; }
+</style>
+</helmet>
+<div style="background:#f4f4f2;color:#141614;min-height:100%">
+  <div style="height:10px;background:#22262a"></div>
+
+  <div style="max-width:1080px;margin:0 auto;padding:44px 28px 0">
+    <a href="Proposta.dc.html" style="display:inline-flex;align-items:center;gap:8px;font-size:14px;color:#6b6f6b;text-decoration:none;margin-bottom:34px">← Torna alla proposta</a>
+    <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.12em;color:#8a8f8a;margin-bottom:14px">APPROFONDIMENTO</div>
+    <h1 style="font-size:clamp(34px,5vw,56px);line-height:1.05;font-weight:800;letter-spacing:-0.035em;margin:0 0 18px;max-width:20ch">Il mockup nel dettaglio</h1>
+    <p style="margin:0;font-size:17px;line-height:1.6;color:#6b6f6b;max-width:64ch">Tutti gli schermi, più una spiegazione di come funziona il calcolatore e perché cambia il modo in cui arrivano le richieste.</p>
+  </div>
+
+  <div style="max-width:1080px;margin:0 auto;padding:60px 28px 0">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px">
+      <sc-for list="{{ shots }}" as="shot" hint-placeholder-count="4">
+        <div style="background:#fff;border:1px solid #e2e2dd;border-radius:16px;padding:14px">
+          <div style="background:#f4f4f2;border:1px solid #ececea;border-radius:10px;overflow:hidden;margin-bottom:12px">
+            <img src="{{ shot.img }}" alt="{{ shot.title }}" style="display:block;width:100%;aspect-ratio:4/3;object-fit:cover" />
+          </div>
+          <div style="font-size:14px;font-weight:600;margin-bottom:4px">{{ shot.title }}</div>
+          <div style="font-size:13px;line-height:1.5;color:#6b6f6b">{{ shot.note }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <div style="max-width:1080px;margin:0 auto;padding:88px 28px 0">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.12em;color:#8a8f8a;margin-bottom:14px">COME FUNZIONA</div>
+    <h2 style="font-size:clamp(26px,3.4vw,38px);line-height:1.1;font-weight:700;letter-spacing:-0.025em;margin:0 0 40px;max-width:26ch">Il calcolatore, passo per passo</h2>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px">
+      <div style="background:#fff;border:1px solid #e2e2dd;border-radius:18px;padding:28px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#1c7a4d;margin-bottom:14px">01</div>
+        <div style="font-size:19px;font-weight:700;letter-spacing:-0.015em;margin-bottom:10px">Il cliente sceglie</div>
+        <div style="font-size:15px;line-height:1.6;color:#6b6f6b">Tipo di servizio, metri quadri, frequenza. Tre tocchi, niente moduli lunghi da compilare.</div>
+      </div>
+      <div style="background:#fff;border:1px solid #e2e2dd;border-radius:18px;padding:28px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#1c7a4d;margin-bottom:14px">02</div>
+        <div style="font-size:19px;font-weight:700;letter-spacing:-0.015em;margin-bottom:10px">Vede subito una cifra</div>
+        <div style="font-size:15px;line-height:1.6;color:#6b6f6b">Il preventivo indicativo appare mentre sceglie. È il tuo listino, con le tue regole: lo imposti tu una volta.</div>
+      </div>
+      <div style="background:#fff;border:1px solid #e2e2dd;border-radius:18px;padding:28px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#1c7a4d;margin-bottom:14px">03</div>
+        <div style="font-size:19px;font-weight:700;letter-spacing:-0.015em;margin-bottom:10px">Ti scrive già informato</div>
+        <div style="font-size:15px;line-height:1.6;color:#6b6f6b">La richiesta ti arriva con servizio, misure e cifra vista. Chi non è nel tuo budget si ferma prima di chiamarti.</div>
+      </div>
+    </div>
+
+    <div style="background:#22262a;color:#f4f4f2;border-radius:22px;padding:clamp(24px,4vw,44px);margin-top:20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:32px;align-items:center">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.12em;color:#8d938d;margin-bottom:12px">PERCHÉ CONTA</div>
+        <div style="font-size:clamp(20px,2.6vw,26px);font-weight:700;letter-spacing:-0.02em;line-height:1.3;text-wrap:pretty">Il prezzo è la prima domanda di chiunque. Se la risposta arriva sul sito, la conversazione parte dal lavoro e non dalla trattativa.</div>
+      </div>
+      <div style="display:grid;gap:16px">
+        <div style="display:flex;gap:12px;font-size:15px;line-height:1.6;color:#c9cdc9"><span style="color:#3fbd7c">✓</span><span>Meno telefonate solo per chiedere quanto costa</span></div>
+        <div style="display:flex;gap:12px;font-size:15px;line-height:1.6;color:#c9cdc9"><span style="color:#3fbd7c">✓</span><span>Richieste più qualificate, già in linea col tuo listino</span></div>
+        <div style="display:flex;gap:12px;font-size:15px;line-height:1.6;color:#c9cdc9"><span style="color:#3fbd7c">✓</span><span>Funziona di notte e nel weekend, quando tu non rispondi</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:1080px;margin:0 auto;padding:72px 28px 72px">
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;border-top:1px solid #e2e2dd;padding-top:34px">
+      <div style="font-size:16px;color:#6b6f6b">Vuoi tornare ai piani e ai prezzi?</div>
+      <a href="Proposta.dc.html" style="display:inline-flex;align-items:center;gap:10px;background:#1c7a4d;color:#fff;font-size:16px;font-weight:700;padding:16px 26px;border-radius:999px;text-decoration:none" style-hover="background:#22935c">Torna alla proposta →</a>
+    </div>
+    <div style="display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;font-size:14px;color:#8a8f8a;margin-top:34px">
+      <div>Francesco Mancino · Roma, IT</div>
+      <div style="display:flex;gap:20px;flex-wrap:wrap">
+        <a href="mailto:mancinofrancesco91@gmail.com" style="color:#6b6f6b;text-decoration:none">mancinofrancesco91@gmail.com</a>
+        <a href="https://www.francescomancino.it" target="_blank" rel="noopener" style="color:#6b6f6b;text-decoration:none">francescomancino.it</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      shots: [
+        { img: "assets/mockup-home-desktop.png", title: "Home · desktop", note: "La pagina principale così come la vede chi arriva da computer." },
+        { img: "assets/mockup-home-calcolatore.png", title: "Home e calcolatore", note: "Hero e calcolatore preventivi affiancati: la cifra indicativa è subito lì." },
+        { img: "assets/mockup-mobile-calcolatore.png", title: "Mobile · calcolatore", note: "La maggior parte dei tuoi clienti arriva da telefono: pulsanti grandi, si usa con una mano." },
+        { img: "assets/mockup-galleria-contatti.png", title: "Galleria, chi siamo e contatti", note: "Lavori divisi per ambiente, recensioni, FAQ e il modulo con il preventivo allegato." }
+      ]
+    };
+  }
+}
+
+</script>
+</body>
+</html>
