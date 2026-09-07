@@ -126,8 +126,7 @@ export default function Mockup() {
             background: "#fbf6e6",
             border: "1px solid #ebe0c0",
             borderRadius: "18px",
-            padding: "28px",
-            maxWidth: "72ch",
+            padding: "clamp(24px,4vw,44px)",
           }}
         >
           <div style={{ fontFamily: MONO, fontSize: "12px", letterSpacing: "0.12em", color: "#9a8b52", marginBottom: "12px" }}>
