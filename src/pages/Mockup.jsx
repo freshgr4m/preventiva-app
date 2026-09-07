@@ -1,6 +1,7 @@
 import { Link, useParams } from "react-router-dom";
 import Hover from "../lib/Hover.jsx";
 import Message from "../lib/Message.jsx";
+import { toGalleryUrls } from "../lib/gallery.js";
 import useProposta from "../hooks/useProposta.js";
 
 const MONO = "'JetBrains Mono',monospace";
@@ -42,7 +43,7 @@ export default function Mockup() {
 
   const companyName = data.company_name || "";
   const problemLine = data.problem_line || "";
-  const gallery = Array.isArray(data.gallery) ? data.gallery : [];
+  const gallery = toGalleryUrls(data.gallery);
   const propostaHref = "/" + slug;
 
   return (

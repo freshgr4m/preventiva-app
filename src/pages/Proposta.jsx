@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Hover from "../lib/Hover.jsx";
 import Message from "../lib/Message.jsx";
+import { toGalleryUrls } from "../lib/gallery.js";
 import useProposta from "../hooks/useProposta.js";
 
 const MONO = "'JetBrains Mono',monospace";
@@ -16,8 +17,9 @@ export default function Proposta() {
   const [freq, setFreq] = useState(1);
   const [lb, setLb] = useState(null);
 
-  // Galleria: da Supabase arriva un array di URL; qui li normalizzo a { src, alt }
-  const gallery = (data?.gallery ?? []).map((src, i) => ({
+  // Galleria: da Supabase arriva un array di URL (stringhe). Lo normalizzo a
+  // { src, alt } scartando voci vuote o segnaposto non-URL.
+  const gallery = toGalleryUrls(data?.gallery).map((src, i) => ({
     src,
     alt: "Anteprima " + (i + 1) + " del sito",
   }));
