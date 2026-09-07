@@ -15,6 +15,11 @@ create table if not exists public.proposte (
 );
 
 -- Lettura pubblica con la anon key (il sito è condiviso via link, nessun login).
+-- Servono SIA il GRANT a livello di tabella SIA la policy RLS: creando la tabella
+-- via SQL il ruolo `anon` non riceve il SELECT in automatico.
+grant select on public.proposte to anon;
+grant select on public.proposte to authenticated;
+
 alter table public.proposte enable row level security;
 
 create policy "Proposte leggibili pubblicamente"
