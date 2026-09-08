@@ -435,26 +435,44 @@ export default function Proposta() {
           </div>
         </div>
 
-        <div style={{ marginTop: "26px" }}>
+        <div style={{ marginTop: "36px", display: "flex", justifyContent: "center" }}>
           <Hover
             as={Link}
             to={"/" + slug + "/mockup"}
             style={{
               display: "inline-flex",
               alignItems: "center",
-              gap: "10px",
-              fontSize: "16px",
+              gap: "12px",
+              fontSize: "17px",
               fontWeight: 700,
               color: "#fff",
               background: accent,
               textDecoration: "none",
-              padding: "16px 26px",
+              padding: "20px 34px",
               borderRadius: "999px",
               border: "2px solid " + accent,
+              boxShadow: "0 12px 30px rgba(20,22,20,0.22)",
             }}
-            hoverStyle={{ background: "#fff", color: accent }}
+            hoverStyle={{
+              filter: "brightness(1.08)",
+              boxShadow: "0 16px 36px rgba(20,22,20,0.3)",
+            }}
           >
-            Guarda i dettagli e gli screenshot →
+            Guarda i dettagli e gli screenshot
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <line x1="7" y1="17" x2="17" y2="7" />
+              <polyline points="8 7 17 7 17 16" />
+            </svg>
           </Hover>
         </div>
       </div>
@@ -664,8 +682,8 @@ export default function Proposta() {
               <div style={{ display: "flex", gap: "11px", fontSize: "15px", lineHeight: 1.5 }}>
                 <span style={{ color: accent }}>✓</span>
                 <span>
-                  <strong>Ottimizzazione SEO</strong>: il tuo sito compare quando qualcuno cerca «pulizie» nella tua zona
-                  su Google
+                  <strong>SEO di base</strong>: preparo il sito da subito per comparire quando qualcuno cerca «pulizie»
+                  nella tua zona su Google
                 </span>
               </div>
             </div>
@@ -688,6 +706,29 @@ export default function Proposta() {
               </div>
             </div>
           </div>
+        </div>
+
+        <div
+          style={{
+            marginTop: "22px",
+            background: "#eef0ef",
+            border: "1px solid #e2e2dd",
+            borderRadius: "16px",
+            padding: "clamp(20px,3vw,30px)",
+          }}
+        >
+          <div style={{ fontFamily: MONO, fontSize: "11px", letterSpacing: "0.14em", color: "#8a8f8a", marginBottom: "12px" }}>
+            OPZIONALE · SOLO SE TI SERVE
+          </div>
+          <div style={{ fontSize: "18px", fontWeight: 700, letterSpacing: "-0.015em", marginBottom: "10px" }}>
+            Vuoi che il posizionamento continui a crescere?
+          </div>
+          <p style={{ margin: 0, fontSize: "15px", lineHeight: 1.6, color: "#6b6f6b", maxWidth: "72ch" }}>
+            La SEO inclusa nel Piano 3 è il lavoro iniziale: prepara il sito per essere trovato. Ma il posizionamento
+            va curato nel tempo, un po' come una pianta — non basta piantarla una volta. Se vuoi che ci lavoriamo ogni
+            settimana (contenuti, controlli, aggiustamenti), è un servizio mensile a parte:{" "}
+            <strong style={{ color: "#141614" }}>+49€/mese</strong>, in aggiunta al canone base.
+          </p>
         </div>
       </div>
 

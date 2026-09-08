@@ -123,20 +123,19 @@ export default function Mockup() {
       <div style={{ maxWidth: "1080px", margin: "0 auto", padding: "40px 28px 0" }}>
         <div
           style={{
-            background: "#fbf6e6",
-            border: "1px solid #ebe0c0",
-            borderRadius: "18px",
-            padding: "clamp(24px,4vw,44px)",
+            background: "#eef0ef",
+            border: "1px solid #e2e2dd",
+            borderRadius: "16px",
+            padding: "clamp(20px,3vw,30px)",
           }}
         >
-          <div style={{ fontFamily: MONO, fontSize: "12px", letterSpacing: "0.12em", color: "#9a8b52", marginBottom: "12px" }}>
+          <div style={{ fontFamily: MONO, fontSize: "11px", letterSpacing: "0.14em", color: "#8a8f8a", marginBottom: "12px" }}>
             NOTA
           </div>
-          <p style={{ margin: 0, fontSize: "15px", lineHeight: 1.65, color: "#5f5a48" }}>
-            I testi e le foto che vedi qui sono provvisori: alcuni sono immagini e frasi
-            generiche di repertorio, altri li ho ripresi dal tuo sito attuale o da tue foto
-            reali dove mi sembravano adatti. Serve solo a farti vedere l'idea: ogni testo,
-            foto e colore si può cambiare, e lo sistemiamo insieme prima di pubblicare.
+          <p style={{ margin: 0, fontSize: "15px", lineHeight: 1.6, color: "#6b6f6b", maxWidth: "72ch" }}>
+            Le foto che vedi qui sono immagini generiche di repertorio, non tue. Alcuni testi invece potrebbero essere
+            ripresi dal tuo sito attuale, dove mi sembravano adatti. Serve solo a farti vedere l'idea: ogni testo, foto
+            e colore si può cambiare, e lo sistemiamo insieme prima di pubblicare.
           </p>
         </div>
       </div>
