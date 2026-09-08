@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import Hover from "../lib/Hover.jsx";
 import Message from "../lib/Message.jsx";
 import { toGalleryUrls } from "../lib/gallery.js";
+import { fallbackListino } from "../lib/listini.js";
 import useProposta from "../hooks/useProposta.js";
 
 const MONO = "'JetBrains Mono',monospace";
@@ -10,7 +11,7 @@ const FALLBACK_ACCENT = "#1c7a4d";
 
 export default function Proposta() {
   const { slug } = useParams();
-  const { data, loading, error } = useProposta(slug);
+  const { data, listino, loading, error } = useProposta(slug);
 
   const [service, setService] = useState(0);
   const [sqm, setSqm] = useState(80);
@@ -51,6 +52,9 @@ export default function Proposta() {
   }
 
   const accent = data.accent_color || FALLBACK_ACCENT;
+  // Listino prezzi della fascia del cliente (tier). Il fallback è la rete di
+  // sicurezza se l'hook non l'ha risolto: i numeri restano corretti per fascia.
+  const L = listino || fallbackListino(data.tier);
   const companyName = data.company_name || "";
   const problemLine = data.problem_line || "";
   const companyLogo = data.company_logo || "";
@@ -538,11 +542,11 @@ export default function Proposta() {
               Hai già un sito? Aggiungo solo il preventivo automatico
             </div>
             <div style={{ display: "flex", alignItems: "baseline", gap: "8px", marginBottom: "8px", minHeight: "40px" }}>
-              <div style={{ fontSize: "40px", fontWeight: 800, letterSpacing: "-0.03em" }}>149€</div>
+              <div style={{ fontSize: "40px", fontWeight: 800, letterSpacing: "-0.03em" }}>{L.piano1_setup}€</div>
               <div style={{ fontSize: "15px", color: "#6b6f6b" }}>una tantum</div>
             </div>
             <div style={{ fontSize: "15px", color: "#141614", marginBottom: "24px" }}>
-              + <strong>19€/mese</strong>
+              + <strong>{L.piano1_mese}€/mese</strong>
             </div>
             <div style={{ height: "1px", background: "#e6e6e1", marginBottom: "22px" }} />
             <div style={{ display: "grid", gap: "12px", alignContent: "start" }}>
@@ -594,11 +598,11 @@ export default function Proposta() {
               Vuoi un sito nuovo, con tutto incluso
             </div>
             <div style={{ display: "flex", alignItems: "baseline", gap: "8px", marginBottom: "8px", minHeight: "40px" }}>
-              <div style={{ fontSize: "40px", fontWeight: 800, letterSpacing: "-0.03em" }}>349€</div>
+              <div style={{ fontSize: "40px", fontWeight: 800, letterSpacing: "-0.03em" }}>{L.piano2_setup}€</div>
               <div style={{ fontSize: "15px", color: "#6b6f6b" }}>una tantum</div>
             </div>
             <div style={{ fontSize: "15px", color: "#141614", marginBottom: "24px" }}>
-              + <strong>49€/mese</strong>
+              + <strong>{L.piano2_mese}€/mese</strong>
             </div>
             <div style={{ height: "1px", background: "#e6e6e1", marginBottom: "22px" }} />
             <div style={{ display: "grid", gap: "12px", marginBottom: "24px", alignContent: "start" }}>
@@ -670,11 +674,13 @@ export default function Proposta() {
               Come il Piano 2, ma ti troveranno <strong style={{ color: "#141614" }}>facilmente</strong> su Google
             </div>
             <div style={{ display: "flex", alignItems: "baseline", gap: "10px", marginBottom: "8px", minHeight: "40px" }}>
-              <div style={{ fontSize: "22px", color: "#9a9e9a", textDecoration: "line-through" }}>599€</div>
-              <div style={{ fontSize: "40px", fontWeight: 800, letterSpacing: "-0.03em" }}>399€</div>
+              <div style={{ fontSize: "22px", color: "#9a9e9a", textDecoration: "line-through" }}>
+                {L.piano3_prezzo_pieno}€
+              </div>
+              <div style={{ fontSize: "40px", fontWeight: 800, letterSpacing: "-0.03em" }}>{L.piano3_setup}€</div>
             </div>
             <div style={{ fontSize: "15px", color: "#6b6f6b", marginBottom: "24px" }}>
-              una tantum + <strong style={{ color: "#141614" }}>49€/mese</strong>
+              una tantum + <strong style={{ color: "#141614" }}>{L.piano3_mese}€/mese</strong>
             </div>
             <div style={{ height: "1px", background: "#e6e6e1", marginBottom: "22px" }} />
             <div style={{ display: "grid", gap: "12px", marginBottom: "24px", alignContent: "start" }}>
@@ -727,7 +733,7 @@ export default function Proposta() {
             La SEO inclusa nel Piano 3 è il lavoro iniziale: prepara il sito per essere trovato. Ma il posizionamento
             va curato nel tempo, un po' come una pianta — non basta piantarla una volta. Se vuoi che ci lavoriamo ogni
             settimana (contenuti, controlli, aggiustamenti), è un servizio mensile a parte:{" "}
-            <strong style={{ color: "#141614" }}>+49€/mese</strong>, in aggiunta al canone base.
+            <strong style={{ color: "#141614" }}>+{L.seo_continuativa_mese}€/mese</strong>, in aggiunta al canone base.
           </p>
         </div>
       </div>
