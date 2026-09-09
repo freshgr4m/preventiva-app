@@ -9,6 +9,30 @@ import useProposta from "../hooks/useProposta.js";
 const MONO = "'JetBrains Mono',monospace";
 const FALLBACK_ACCENT = "#1c7a4d";
 
+const WHATSAPP_NUMBER = "393282994717";
+const WHATSAPP_MESSAGE = "Ciao Francesco! Ho visto la tua proposta e vorrei parlarne.";
+
+// Piccola freccia diagonale (↗), la stessa usata sul bottone "Guarda i
+// dettagli e gli screenshot" — la riuso qui per coerenza visiva.
+function ArrowIcon() {
+  return (
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <line x1="7" y1="17" x2="17" y2="7" />
+      <polyline points="8 7 17 7 17 16" />
+    </svg>
+  );
+}
+
 export default function Proposta() {
   const { slug } = useParams();
   const { data, listino, loading, error } = useProposta(slug);
@@ -132,6 +156,75 @@ export default function Proposta() {
   });
 
   const lbOpen = lb != null && gallery[lb];
+
+  // Sezione "chi sono": un'unica griglia di tile (etichetta + valore) invece di
+  // due blocchi con formati diversi, per un allineamento più ordinato.
+  const contactLinkStyle = {
+    color: "#f4f4f2",
+    textDecoration: "none",
+    borderBottom: "1px solid #4b5158",
+    paddingBottom: "2px",
+  };
+  const waNumber = WHATSAPP_NUMBER.replace(/\D/g, "");
+  const waHref = waNumber
+    ? "https://wa.me/" + waNumber + "?text=" + encodeURIComponent(WHATSAPP_MESSAGE)
+    : null;
+  // Griglia 2x2 (come prima): ruolo, sede, focus, disponibilità.
+  const metaTiles = [
+    { label: "RUOLO", value: "Sviluppatore web" },
+    { label: "SEDE", value: "Roma, IT · Remote" },
+    { label: "FOCUS", value: "Siti e strumenti su misura" },
+    {
+      label: "DISPONIBILITÀ",
+      value: (
+        <span style={{ display: "inline-flex", alignItems: "center", gap: "8px" }}>
+          <span style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#3fbd7c" }} />
+          Disponibile ora
+        </span>
+      ),
+    },
+  ];
+
+  // Contatti: una riga ciascuno (come prima), così un valore lungo (l'email)
+  // non si scontra mai con quello accanto.
+  const contactRows = [
+    {
+      label: "EMAIL",
+      value: (
+        <a href="mailto:mancinofrancesco91@gmail.com" style={contactLinkStyle}>
+          mancinofrancesco91@gmail.com
+        </a>
+      ),
+    },
+    ...(waHref
+      ? [
+          {
+            label: "WHATSAPP",
+            value: (
+              <a href={waHref} target="_blank" rel="noopener" style={contactLinkStyle}>
+                +39 328 299 4717
+              </a>
+            ),
+          },
+        ]
+      : []),
+    {
+      label: "GITHUB",
+      value: (
+        <a href="https://github.com/freshgr4m" style={contactLinkStyle}>
+          @freshgr4m
+        </a>
+      ),
+    },
+    {
+      label: "LINKEDIN",
+      value: (
+        <a href="https://www.linkedin.com/in/francesco-mancino-dev" style={contactLinkStyle}>
+          in/francesco-mancino-dev
+        </a>
+      ),
+    },
+  ];
 
   return (
     <div style={{ background: "#f4f4f2", color: "#141614", minHeight: "100%", padding: "0 0 0 0" }}>
@@ -492,20 +585,7 @@ export default function Proposta() {
             }}
           >
             Guarda i dettagli e gli screenshot
-            <svg
-              width="18"
-              height="18"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-            >
-              <line x1="7" y1="17" x2="17" y2="7" />
-              <polyline points="8 7 17 7 17 16" />
-            </svg>
+            <ArrowIcon />
           </Hover>
         </div>
       </div>
@@ -806,7 +886,7 @@ export default function Proposta() {
             display: "grid",
             gridTemplateColumns: "repeat(auto-fit,minmax(260px,1fr))",
             gap: "clamp(24px,4vw,48px)",
-            alignItems: "start",
+            alignItems: "stretch",
           }}
         >
           <div>
@@ -815,7 +895,9 @@ export default function Proposta() {
               alt="Francesco Mancino"
               style={{
                 width: "100%",
-                maxWidth: "340px",
+                height: "100%",
+                minHeight: "320px",
+                objectFit: "cover",
                 borderRadius: "18px",
                 display: "block",
                 filter: "saturate(0.95)",
@@ -823,7 +905,7 @@ export default function Proposta() {
             />
           </div>
           <div>
-            <div style={{ fontFamily: MONO, fontSize: "12px", letterSpacing: "0.12em", color: "#8d938d", marginBottom: "14px" }}>
+            <div style={{ fontFamily: MONO, fontSize: "12px", letterSpacing: "0.12em", color: "#8d938d", marginBottom: "16px" }}>
               03 — CHI SONO
             </div>
             <h2
@@ -832,14 +914,14 @@ export default function Proposta() {
                 fontWeight: 700,
                 letterSpacing: "-0.03em",
                 lineHeight: 1.1,
-                margin: "0 0 18px",
+                margin: "0 0 16px",
               }}
             >
               Francesco Mancino
             </h2>
             <p
               style={{
-                margin: "0 0 30px",
+                margin: "0 0 32px",
                 fontSize: "16px",
                 lineHeight: 1.65,
                 color: "#c9cdc9",
@@ -858,95 +940,99 @@ export default function Proposta() {
                 display: "grid",
                 gridTemplateColumns: "repeat(auto-fit,minmax(140px,1fr))",
                 gap: "22px 26px",
-                marginBottom: "32px",
+                marginBottom: "28px",
               }}
             >
-              <div>
-                <div style={{ fontFamily: MONO, fontSize: "11px", letterSpacing: "0.1em", color: "#8d938d", marginBottom: "6px" }}>
-                  RUOLO
+              {metaTiles.map((t) => (
+                <div key={t.label}>
+                  <div
+                    style={{
+                      fontFamily: MONO,
+                      fontSize: "11px",
+                      letterSpacing: "0.1em",
+                      color: "#8d938d",
+                      marginBottom: "6px",
+                    }}
+                  >
+                    {t.label}
+                  </div>
+                  <div style={{ fontSize: "15px", fontWeight: 600 }}>{t.value}</div>
                 </div>
-                <div style={{ fontSize: "15px", fontWeight: 600 }}>Sviluppatore web</div>
-              </div>
-              <div>
-                <div style={{ fontFamily: MONO, fontSize: "11px", letterSpacing: "0.1em", color: "#8d938d", marginBottom: "6px" }}>
-                  SEDE
-                </div>
-                <div style={{ fontSize: "15px", fontWeight: 600 }}>Roma, IT · Remote</div>
-              </div>
-              <div>
-                <div style={{ fontFamily: MONO, fontSize: "11px", letterSpacing: "0.1em", color: "#8d938d", marginBottom: "6px" }}>
-                  FOCUS
-                </div>
-                <div style={{ fontSize: "15px", fontWeight: 600 }}>Siti e strumenti su misura</div>
-              </div>
-              <div>
-                <div style={{ fontFamily: MONO, fontSize: "11px", letterSpacing: "0.1em", color: "#8d938d", marginBottom: "6px" }}>
-                  DISPONIBILITÀ
-                </div>
-                <div style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "15px", fontWeight: 600 }}>
-                  <span style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#3fbd7c" }} />
-                  Disponibile ora
-                </div>
-              </div>
+              ))}
             </div>
 
-            <div style={{ display: "grid", gap: "10px", marginBottom: "34px" }}>
-              <div style={{ display: "flex", gap: "14px", fontSize: "15px", alignItems: "baseline" }}>
-                <span style={{ fontFamily: MONO, fontSize: "11px", letterSpacing: "0.1em", color: "#8d938d", minWidth: "74px" }}>
-                  EMAIL
-                </span>
-                <a
-                  href="mailto:mancinofrancesco91@gmail.com"
-                  style={{ color: "#f4f4f2", textDecoration: "none", borderBottom: "1px solid #4b5158", paddingBottom: "2px" }}
-                >
-                  mancinofrancesco91@gmail.com
-                </a>
-              </div>
-              <div style={{ display: "flex", gap: "14px", fontSize: "15px", alignItems: "baseline" }}>
-                <span style={{ fontFamily: MONO, fontSize: "11px", letterSpacing: "0.1em", color: "#8d938d", minWidth: "74px" }}>
-                  GITHUB
-                </span>
-                <a
-                  href="https://github.com/freshgr4m"
-                  style={{ color: "#f4f4f2", textDecoration: "none", borderBottom: "1px solid #4b5158", paddingBottom: "2px" }}
-                >
-                  @freshgr4m
-                </a>
-              </div>
-              <div style={{ display: "flex", gap: "14px", fontSize: "15px", alignItems: "baseline" }}>
-                <span style={{ fontFamily: MONO, fontSize: "11px", letterSpacing: "0.1em", color: "#8d938d", minWidth: "74px" }}>
-                  LINKEDIN
-                </span>
-                <a
-                  href="https://www.linkedin.com/in/francesco-mancino-dev"
-                  style={{ color: "#f4f4f2", textDecoration: "none", borderBottom: "1px solid #4b5158", paddingBottom: "2px" }}
-                >
-                  in/francesco-mancino-dev
-                </a>
-              </div>
+            <div style={{ display: "grid", gap: "10px", marginBottom: "30px" }}>
+              {contactRows.map((row) => (
+                <div key={row.label} style={{ display: "flex", gap: "14px", fontSize: "15px", alignItems: "baseline" }}>
+                  <span
+                    style={{
+                      fontFamily: MONO,
+                      fontSize: "11px",
+                      letterSpacing: "0.1em",
+                      color: "#8d938d",
+                      minWidth: "74px",
+                    }}
+                  >
+                    {row.label}
+                  </span>
+                  {row.value}
+                </div>
+              ))}
             </div>
 
-            <Hover
-              as="a"
-              href="https://www.francescomancino.it"
-              target="_blank"
-              rel="noopener"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "10px",
-                background: accent,
-                color: "#fff",
-                fontSize: "17px",
-                fontWeight: 700,
-                padding: "18px 30px",
-                borderRadius: "999px",
-                textDecoration: "none",
-              }}
-              hoverStyle={{ background: "#22935c" }}
-            >
-              Guarda i miei lavori →
-            </Hover>
+            <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
+              <Hover
+                as="a"
+                href="https://www.francescomancino.it/projects"
+                target="_blank"
+                rel="noopener"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "8px",
+                  background: accent,
+                  color: "#fff",
+                  fontSize: "15px",
+                  fontWeight: 700,
+                  padding: "14px 22px",
+                  borderRadius: "999px",
+                  border: "2px solid " + accent,
+                  textDecoration: "none",
+                  whiteSpace: "nowrap",
+                }}
+                hoverStyle={{ background: "#22935c", borderColor: "#22935c" }}
+              >
+                Guarda i miei lavori
+                <ArrowIcon />
+              </Hover>
+
+              {waHref && (
+                <Hover
+                  as="a"
+                  href={waHref}
+                  target="_blank"
+                  rel="noopener"
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "8px",
+                    background: "transparent",
+                    color: "#f4f4f2",
+                    fontSize: "15px",
+                    fontWeight: 700,
+                    padding: "14px 22px",
+                    borderRadius: "999px",
+                    border: "2px solid rgba(244,244,242,0.35)",
+                    textDecoration: "none",
+                    whiteSpace: "nowrap",
+                  }}
+                  hoverStyle={{ background: "rgba(244,244,242,0.08)", borderColor: "rgba(244,244,242,0.6)" }}
+                >
+                  Scrivimi su WhatsApp
+                  <ArrowIcon />
+                </Hover>
+              )}
+            </div>
           </div>
         </div>
       </div>

@@ -92,7 +92,7 @@ export default function Mockup() {
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(2,1fr)",
+              gridTemplateColumns: "repeat(auto-fit,minmax(340px,1fr))",
               gap: "18px",
             }}
           >
@@ -109,11 +109,11 @@ export default function Mockup() {
                 >
                   <img
                     src={src}
-                    alt={"Schermata " + (i + 1)}
+                    alt={"Esempio " + (i + 1)}
                     style={{ display: "block", width: "100%", aspectRatio: "4/3", objectFit: "cover" }}
                   />
                 </div>
-                <div style={{ fontSize: "14px", fontWeight: 600 }}>{"Schermata " + (i + 1)}</div>
+                <div style={{ fontSize: "14px", fontWeight: 600 }}>{"Esempio " + (i + 1)}</div>
               </div>
             ))}
           </div>
