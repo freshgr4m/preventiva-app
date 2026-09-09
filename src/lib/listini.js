@@ -12,6 +12,7 @@ export const FALLBACK_LISTINI = {
     piano3_setup: 399,
     piano3_mese: 49,
     seo_continuativa_mese: 49,
+    pagina_extra: 50,
   },
   medio: {
     tier: "medio",
@@ -23,6 +24,7 @@ export const FALLBACK_LISTINI = {
     piano3_setup: 599,
     piano3_mese: 59,
     seo_continuativa_mese: 69,
+    pagina_extra: 50,
   },
   grande: {
     tier: "grande",
@@ -34,6 +36,7 @@ export const FALLBACK_LISTINI = {
     piano3_setup: 699,
     piano3_mese: 69,
     seo_continuativa_mese: 89,
+    pagina_extra: 80,
   },
 };
 
@@ -62,5 +65,6 @@ export function normalizeListino(raw, tier) {
     piano3_setup: num(src.piano3_setup, base.piano3_setup),
     piano3_mese: num(src.piano3_mese, base.piano3_mese),
     seo_continuativa_mese: num(src.seo_continuativa_mese, base.seo_continuativa_mese),
+    pagina_extra: num(src.pagina_extra, base.pagina_extra),
   };
 }

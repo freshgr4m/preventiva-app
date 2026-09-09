@@ -102,6 +102,35 @@ export default function Proposta() {
     ". Il preventivo definitivo lo confermi tu.";
   const sqmLabel = sqm + " m²";
 
+  // Righe della tabella "lavoro continuativo": i canoni mensili (tolti dalle card)
+  // più la SEO continuativa opzionale. I numeri arrivano dal listino della fascia.
+  const canoneRows = [
+    {
+      label: "Manutenzione — Piano 1",
+      desc: "Il calcolatore preventivi sempre online, aggiornamenti e piccole modifiche.",
+      price: L.piano1_mese,
+    },
+    {
+      label:
+        L.piano2_mese === L.piano3_mese ? "Manutenzione — Piano 2 e 3" : "Manutenzione — Piano 2",
+      desc: "Tutto il sito online e curato da me: hosting, aggiornamenti, correzioni e modifiche.",
+      price: L.piano2_mese,
+    },
+  ];
+  if (L.piano3_mese !== L.piano2_mese) {
+    canoneRows.push({
+      label: "Manutenzione — Piano 3",
+      desc: "Come il Piano 2, con la parte SEO di base sempre monitorata.",
+      price: L.piano3_mese,
+    });
+  }
+  canoneRows.push({
+    label: "SEO continuativa — opzionale",
+    desc: "Contenuti, controlli e ottimizzazioni ogni settimana per salire su Google. Si aggiunge al canone del piano.",
+    price: L.seo_continuativa_mese,
+    plus: true,
+  });
+
   const lbOpen = lb != null && gallery[lb];
 
   return (
@@ -497,8 +526,8 @@ export default function Proposta() {
           Come possiamo lavorare insieme
         </h2>
         <p style={{ margin: "0 0 40px", fontSize: "16px", lineHeight: 1.6, color: "#6b6f6b", maxWidth: "76ch" }}>
-          Tre modi di partire. Nessun vincolo di durata: il mensile si può interrompere quando vuoi. Tempi di consegna:
-          solitamente entro 1-2 settimane.
+          Tre modi di partire, con un prezzo una tantum: il sito è tuo. Il canone mensile per tenerlo online e curato è
+          qui sotto, a parte, e si interrompe quando vuoi. Tempi di consegna: solitamente entro 1-2 settimane.
         </p>
 
         <div
@@ -541,12 +570,9 @@ export default function Proposta() {
             >
               Hai già un sito? Aggiungo solo il preventivo automatico
             </div>
-            <div style={{ display: "flex", alignItems: "baseline", gap: "8px", marginBottom: "8px", minHeight: "40px" }}>
+            <div style={{ display: "flex", alignItems: "baseline", gap: "8px", marginBottom: "28px", minHeight: "40px" }}>
               <div style={{ fontSize: "40px", fontWeight: 800, letterSpacing: "-0.03em" }}>{L.piano1_setup}€</div>
               <div style={{ fontSize: "15px", color: "#6b6f6b" }}>una tantum</div>
-            </div>
-            <div style={{ fontSize: "15px", color: "#141614", marginBottom: "24px" }}>
-              + <strong>{L.piano1_mese}€/mese</strong>
             </div>
             <div style={{ height: "1px", background: "#e6e6e1", marginBottom: "22px" }} />
             <div style={{ display: "grid", gap: "12px", alignContent: "start" }}>
@@ -597,12 +623,9 @@ export default function Proposta() {
             >
               Vuoi un sito nuovo, con tutto incluso
             </div>
-            <div style={{ display: "flex", alignItems: "baseline", gap: "8px", marginBottom: "8px", minHeight: "40px" }}>
+            <div style={{ display: "flex", alignItems: "baseline", gap: "8px", marginBottom: "28px", minHeight: "40px" }}>
               <div style={{ fontSize: "40px", fontWeight: 800, letterSpacing: "-0.03em" }}>{L.piano2_setup}€</div>
               <div style={{ fontSize: "15px", color: "#6b6f6b" }}>una tantum</div>
-            </div>
-            <div style={{ fontSize: "15px", color: "#141614", marginBottom: "24px" }}>
-              + <strong>{L.piano2_mese}€/mese</strong>
             </div>
             <div style={{ height: "1px", background: "#e6e6e1", marginBottom: "22px" }} />
             <div style={{ display: "grid", gap: "12px", marginBottom: "24px", alignContent: "start" }}>
@@ -618,9 +641,6 @@ export default function Proposta() {
                 <span style={{ color: accent }}>✓</span>
                 <span>Se c'è un problema o serve una modifica, ci penso io</span>
               </div>
-            </div>
-            <div style={{ fontFamily: MONO, fontSize: "13px", color: "#8a8f8a", marginTop: "auto" }}>
-              Pagine aggiuntive: 80€ a pagina
             </div>
           </div>
 
@@ -673,14 +693,21 @@ export default function Proposta() {
             >
               Come il Piano 2, ma ti troveranno <strong style={{ color: "#141614" }}>facilmente</strong> su Google
             </div>
-            <div style={{ display: "flex", alignItems: "baseline", gap: "10px", marginBottom: "8px", minHeight: "40px" }}>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "baseline",
+                gap: "10px",
+                flexWrap: "wrap",
+                marginBottom: "28px",
+                minHeight: "40px",
+              }}
+            >
               <div style={{ fontSize: "22px", color: "#9a9e9a", textDecoration: "line-through" }}>
                 {L.piano3_prezzo_pieno}€
               </div>
               <div style={{ fontSize: "40px", fontWeight: 800, letterSpacing: "-0.03em" }}>{L.piano3_setup}€</div>
-            </div>
-            <div style={{ fontSize: "15px", color: "#6b6f6b", marginBottom: "24px" }}>
-              una tantum + <strong style={{ color: "#141614" }}>{L.piano3_mese}€/mese</strong>
+              <div style={{ fontSize: "15px", color: "#6b6f6b" }}>una tantum</div>
             </div>
             <div style={{ height: "1px", background: "#e6e6e1", marginBottom: "22px" }} />
             <div style={{ display: "grid", gap: "12px", marginBottom: "24px", alignContent: "start" }}>
@@ -716,7 +743,7 @@ export default function Proposta() {
 
         <div
           style={{
-            marginTop: "22px",
+            marginTop: "26px",
             background: "#eef0ef",
             border: "1px solid #e2e2dd",
             borderRadius: "16px",
@@ -724,16 +751,47 @@ export default function Proposta() {
           }}
         >
           <div style={{ fontFamily: MONO, fontSize: "11px", letterSpacing: "0.14em", color: "#8a8f8a", marginBottom: "12px" }}>
-            OPZIONALE · SOLO SE TI SERVE
+            LAVORO CONTINUATIVO
           </div>
-          <div style={{ fontSize: "18px", fontWeight: 700, letterSpacing: "-0.015em", marginBottom: "10px" }}>
-            Vuoi che il posizionamento continui a crescere?
+          <div style={{ fontSize: "20px", fontWeight: 700, letterSpacing: "-0.02em", marginBottom: "8px" }}>
+            Vogliamo continuare a lavorare insieme?
           </div>
-          <p style={{ margin: 0, fontSize: "15px", lineHeight: 1.6, color: "#6b6f6b", maxWidth: "72ch" }}>
-            La SEO inclusa nel Piano 3 è il lavoro iniziale: prepara il sito per essere trovato. Ma il posizionamento
-            va curato nel tempo, un po' come una pianta — non basta piantarla una volta. Se vuoi che ci lavoriamo ogni
-            settimana (contenuti, controlli, aggiustamenti), è un servizio mensile a parte:{" "}
-            <strong style={{ color: "#141614" }}>+{L.seo_continuativa_mese}€/mese</strong>, in aggiunta al canone base.
+          <p style={{ margin: "0 0 26px", fontSize: "15px", lineHeight: 1.6, color: "#6b6f6b", maxWidth: "68ch" }}>
+            Una volta online, il sito va tenuto aggiornato e sicuro — non è un "metti e dimentica". Se vuoi che ci
+            pensi io, è un canone mensile a parte, senza vincoli: lo fermi quando vuoi.
+          </p>
+
+          <div>
+            {canoneRows.map((r) => (
+              <div
+                key={r.label}
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "baseline",
+                  gap: "20px",
+                  padding: "14px 0",
+                  borderBottom: "1px solid #dcded9",
+                  flexWrap: "wrap",
+                }}
+              >
+                <div style={{ flex: "1 1 260px", maxWidth: "48ch" }}>
+                  <div style={{ fontSize: "15px", fontWeight: 700, marginBottom: "3px" }}>{r.label}</div>
+                  <div style={{ fontSize: "13.5px", lineHeight: 1.55, color: "#6b6f6b" }}>{r.desc}</div>
+                </div>
+                <div style={{ display: "flex", alignItems: "baseline", gap: "4px", whiteSpace: "nowrap" }}>
+                  <span style={{ fontSize: "22px", fontWeight: 800, letterSpacing: "-0.02em" }}>
+                    {r.plus ? "+" : ""}
+                    {r.price}€
+                  </span>
+                  <span style={{ fontSize: "13px", color: "#6b6f6b" }}>/mese</span>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <p style={{ margin: "18px 0 0", fontSize: "13px", lineHeight: 1.6, color: "#8a8f8a" }}>
+            Pagine aggiuntive: {L.pagina_extra}€ a pagina.
           </p>
         </div>
       </div>
